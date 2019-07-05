@@ -1,0 +1,4 @@
+75 PR2/FINISHED/1 Pavel/[1 cream]
+585 PR3/ACTIVE/1 Pavel/[2 cake][3 soup]
+991 PR5/ACTIVE/4 Николай/[1 cream][4 meat]
+568 PR67/DELETED/5 Natalia/[1 cream][2 cake][6 vegan]
