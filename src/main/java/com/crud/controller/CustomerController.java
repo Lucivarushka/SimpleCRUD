@@ -1,13 +1,14 @@
 package main.java.com.crud.controller;
 
 import main.java.com.crud.model.Customer;
+import main.java.com.crud.repository.CustomersRepository;
 import main.java.com.crud.repository.JavaIOCustomersRepositoryImpl;
 
 import java.io.IOException;
 import java.util.List;
 
 public class CustomerController {
-    private static JavaIOCustomersRepositoryImpl customers = new JavaIOCustomersRepositoryImpl();
+    private static CustomersRepository customers = new JavaIOCustomersRepositoryImpl();
 
     public List<String> printAll() throws IOException {
         return customers.getAll();
@@ -22,7 +23,11 @@ public class CustomerController {
     }
 
     public void updateCategory(Customer updateCategory) {
-        customers.update(updateCategory);
+        try {
+            customers.update(updateCategory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Customer getValueByIndex(long index) {

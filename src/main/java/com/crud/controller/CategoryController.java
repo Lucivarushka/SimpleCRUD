@@ -1,13 +1,14 @@
 package main.java.com.crud.controller;
 
 import main.java.com.crud.model.Category;
+import main.java.com.crud.repository.CategoryRepository;
 import main.java.com.crud.repository.JavaIOCategoryRepositoryImpl;
 
 import java.io.IOException;
 import java.util.List;
 
 public class CategoryController {
-    private static JavaIOCategoryRepositoryImpl category = new JavaIOCategoryRepositoryImpl();
+    private static CategoryRepository category = new JavaIOCategoryRepositoryImpl();
 
     public List<String> printAll() throws IOException {
         return category.getAll();
@@ -22,7 +23,11 @@ public class CategoryController {
     }
 
     public void updateCategory(Category updateCategory) {
-        category.update(updateCategory);
+        try {
+            category.update(updateCategory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Category getValueByIndex(long index) {

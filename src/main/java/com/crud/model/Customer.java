@@ -3,10 +3,9 @@ package main.java.com.crud.model;
 public class Customer {
     private long id;
     private String nameCustomer;
-    private int max = 1000;
 
     public Customer(String nameCustomer) {
-        this.id = (int) (Math.random() * ++ max);
+        this.id = (int) (Math.random() * 500);
         this.nameCustomer = nameCustomer;
     }
 
@@ -17,6 +16,10 @@ public class Customer {
 
     public long getId() {
         return id;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
     }
 
     @Override

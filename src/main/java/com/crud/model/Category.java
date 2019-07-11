@@ -3,10 +3,9 @@ package main.java.com.crud.model;
 public class Category implements Comparable<Category> {
     private long id;
     private String nameCategory;
-    private int max = 1000;
 
     public Category(String nameCategory) {
-        this.id = (int) (Math.random() * ++max);
+        this.id = (int) (Math.random() * 500);
         this.nameCategory = nameCategory;
     }
 
@@ -21,6 +20,10 @@ public class Category implements Comparable<Category> {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getNameCategory() {
+        return nameCategory;
     }
 
     @Override

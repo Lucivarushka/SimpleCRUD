@@ -10,11 +10,8 @@ public class Project {
     private Set<Category> categories;
     private Customer customer;
 
-    private String allInfo;
-    int max = 1000;
-
     public Project(String nameProjects, ProjectStatus projectStatus, Customer customer, Set<Category> categories) {
-        this.id = (int) (Math.random() * ++max);
+        this.id = (int) (Math.random() * 500);
         this.nameProjects = nameProjects;
         this.projectStatus = projectStatus;
         this.customer = customer;
@@ -37,6 +34,27 @@ public class Project {
         return id;
     }
 
+    public String getNameProjects() {
+        return nameProjects;
+    }
+
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public String getIdCategories(){
+        String categToStr = "";
+        Iterator<Category> iter = categories.iterator();
+        while (iter.hasNext()) {
+            categToStr += "[" + iter.next().getId() + "]";
+        }
+        return categToStr;
+    }
+
     @Override
     public String toString() {
         String categToStr = "";
@@ -44,6 +62,6 @@ public class Project {
         while (iter.hasNext()) {
             categToStr += "[" + iter.next() + "]";
         }
-        return id + " " + nameProjects + "/" + projectStatus + "/" + customer + "/" + categToStr;
+        return id + " " + nameProjects + "/" + projectStatus + "/" + customer.getId() + "/" + categToStr;
     }
 }

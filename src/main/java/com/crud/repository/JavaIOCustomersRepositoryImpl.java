@@ -12,12 +12,13 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class JavaIOCustomersRepositoryImpl implements CustomersRepository {
-    private static String FILE = "src\\main\\java\\com\\storage\\customers.txt";
+    private static String FILE = "src\\main\\resources\\customers.txt";
 
     @Override
     public void create(Customer value) {
+        String lineForSave = value.getId() + " " + value.getNameCustomer();
         try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(FILE, true)))) {
-            printWriter.println(value);
+            printWriter.println(lineForSave);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -25,7 +26,7 @@ public class JavaIOCustomersRepositoryImpl implements CustomersRepository {
 
     @Override
     public void update(Customer value) {
-        List<String> linesForUpdate = null;
+        List<String> linesForUpdate;
         try {
             linesForUpdate = Files.readAllLines(Paths.get(FILE));
             String id = String.valueOf(value.getId());
@@ -44,7 +45,7 @@ public class JavaIOCustomersRepositoryImpl implements CustomersRepository {
 
     @Override
     public void delete(Long aLong) {
-        List<String> linesForDelete = null;
+        List<String> linesForDelete;
         try {
             linesForDelete = Files.readAllLines(Paths.get(FILE));
             String id = String.valueOf(aLong);
@@ -63,17 +64,17 @@ public class JavaIOCustomersRepositoryImpl implements CustomersRepository {
 
     @Override
     public Customer getById(Long aLong) {
-        List<String> linesForDelete = null;
+        List<String> linesForId;
         try {
-            linesForDelete = Files.readAllLines(Paths.get(FILE));
+            linesForId = Files.readAllLines(Paths.get(FILE));
 
             String id = String.valueOf(aLong);
             String name = null;
 
-            for (int i = 0; i < linesForDelete.size(); i++) {
-                String line = linesForDelete.get(i).substring(0, linesForDelete.get(i).indexOf(' '));
+            for (int i = 0; i < linesForId.size(); i++) {
+                String line = linesForId.get(i).substring(0, linesForId.get(i).indexOf(' '));
                 if (line.equals(id)) {
-                    name = linesForDelete.get(i).substring(linesForDelete.get(i).indexOf(' ') + 1, linesForDelete.get(i).length());
+                    name = linesForId.get(i).substring(linesForId.get(i).indexOf(' ') + 1, linesForId.get(i).length());
                     break;
                 }
             }
@@ -86,21 +87,20 @@ public class JavaIOCustomersRepositoryImpl implements CustomersRepository {
 
     @Override
     public Customer getByValue(String value) {
-        List<String> linesForDelete = null;
+        List<String> linesForVal;
         try {
-            linesForDelete = Files.readAllLines(Paths.get(FILE));
+            linesForVal = Files.readAllLines(Paths.get(FILE));
 
             Long id = null;
             String name = null;
 
-            for (int i = 0; i < linesForDelete.size(); i++) {
-                if (linesForDelete.get(i).indexOf(value) != -1) {
-                    id = Long.parseLong(linesForDelete.get(i).substring(0, linesForDelete.get(i).indexOf(' ')));
-                    name = linesForDelete.get(i).substring(linesForDelete.get(i).indexOf(' ') + 1, linesForDelete.get(i).length());
+            for (int i = 0; i < linesForVal.size(); i++) {
+                if (linesForVal.get(i).indexOf(value) != -1) {
+                    id = Long.parseLong(linesForVal.get(i).substring(0, linesForVal.get(i).indexOf(' ')));
+                    name = linesForVal.get(i).substring(linesForVal.get(i).indexOf(' ') + 1, linesForVal.get(i).length());
                 }
             }
             return new Customer(id, name);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
