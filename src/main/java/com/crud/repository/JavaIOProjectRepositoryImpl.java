@@ -16,8 +16,8 @@ public class JavaIOProjectRepositoryImpl implements ProjectRepository {
 
     @Override
     public void create(Project value) {
-        String lineForSave = value.getId() + " " + value.getNameProjects() + "/" + value.getProjectStatus() + "/" + value.getCustomer()
-                + "/" + value.getIdCategories();
+        String lineForSave = value.getId() + " " + value.getNameProjects() + "/" + value.getProjectStatus() + "/" +
+                value.getCustomer().getId() + "/" + value.getIdCategories();
         try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(FILE, true)))) {
             printWriter.println(lineForSave);
         } catch (IOException e) {
